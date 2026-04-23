@@ -1,14 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+*{
+	padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	font-family: 'JetBrains Mono';
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: black;
+  background-color: #161616;
 }
 
 :root {
-  --tamanho-header: 80px;
+  --tamanho-header: 70px;
   --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-simulador: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
   --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
@@ -23,18 +29,186 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid #32b9cd;
+	font-size: 18px;
+	background-color: #2B2B2B;
+	color: white;
 }
 
+.header button{
+	font-size: 18px;
+	color: white;
+}
+
+.btnCadastro{
+	width: 166px;
+	height: 50px;
+	background-color: #289D41;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-left: solid 1px #007B1B;
+	border-bottom: solid 2px #007B1B;
+	border-right: solid 0.5px #007B1B;
+	border-top: none;
+}
+
+.navTitulo{
+	margin-top: -5px;
+}
+
+.navContent{
+	margin-top: 8px;
+}
 .header .container {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
 }
 
+.nvim-card {
+  display: flex;
+	height: 440px;
+	color: white;
+	padding: 50px;
+	gap: 10px;
+}
+
+.leftSide img{
+	margin-top: 20px;
+}
+
+.topCard{
+	margin-bottom: 10px;
+}
+
+.bottomCard{
+	width: 1106px;
+	height: 370px;
+	background-color: #2B2B2B;
+	padding: 30px;
+	text-align: justify;
+	display: flex;
+	border-bottom-left-radius: 20px;
+	align-items: center;
+}
+
+.nvim-card-text{
+	font-size: 22px;
+}
+
+
+
+/* lado direito */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* texto */
+.navLink {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center; /* centraliza certinho */
+}
+
+/* botões juntos */
+.navButtons {
+  display: flex;
+}
+
+/* botões */
+.btnCadastro,
+.btnLogin {
+  height: 40px; /* padroniza */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnLogin{
+	width: 99px;
+	height: 50px;
+	background-color: #8A2AFF;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom: solid 2px #6913D3;
+	border-left: solid 0.5px #6913D3;
+	border-right: solid 1px #6913D3;
+	border-top: none;
+
+}
+.header {
+  height: var(--tamanho-header);
+  font-size: 18px;
+  background-color: #2B2B2B;
+  color: white;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  height: 100%;
+}
+
+.titulo {
+  color: #3DDBD9;
+  font-weight: 500;
+  font-size: 28px;
+  margin: 0;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+/* LINKS */
 .header a {
   text-decoration: none;
-  color: #e3b062;
+  color: white;
+}
+
+/* BOTÕES */
+.header button {
+  font-size: 18px;
+  color: white;
+}
+
+/* BOTÃO CADASTRO */
+.btnCadastro {
+  width: 166px;
+  height: 50px;
+  background-color: #289D41;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-left: solid 1px #007B1B;
+  border-bottom: solid 2px #007B1B;
+  border-right: solid 0.5px #007B1B;
+  border-top: none;
+}
+
+/* BOTÃO LOGIN */
+.btnLogin {
+  width: 99px;
+  height: 50px;
+  background-color: #8A2AFF;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: solid 2px #6913D3;
+  border-left: solid 0.5px #6913D3;
+  border-right: solid 1px #6913D3;
+  border-top: none;
+}
+.header a {
+  text-decoration: none;
+	color: white;
 }
 
 .agora {
@@ -51,9 +225,11 @@ body {
 }
 
 .titulo {
-  color: #32b9cd;
+  color: #3DDBD9;
   width: fit-content;
   font-weight: 500;
+	font-size: 28px;
+	align-self: flex-start;
 }
 
 .header h1 {
@@ -65,8 +241,6 @@ body {
 .banner {
   height: var(--tamanho-banner);
   color: white;
-  background-image: url('../assets/imgs/bg-jelly-fish-para-home.png');
-  background-size: cover;
 }
 
 .banner .container {
