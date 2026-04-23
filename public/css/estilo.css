@@ -93,19 +93,22 @@ body {
 }
 
 .nvim-card-text{
-	font-size: 22px;
+	font-size: 20px;
+	padding-right: 50px;
 }
 
+.wave{
+	margin-top: 200px;
+	background-image: url('../assets/imgs/backWave.png');
+	background-size: cover;
+}
 
-
-/* lado direito */
 .navRight {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-/* texto */
 .navLink {
   color: white;
   text-decoration: none;
@@ -114,15 +117,13 @@ body {
   align-items: center; /* centraliza certinho */
 }
 
-/* botões juntos */
 .navButtons {
   display: flex;
 }
 
-/* botões */
 .btnCadastro,
 .btnLogin {
-  height: 40px; /* padroniza */
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,7 +161,6 @@ body {
   margin: 0;
 }
 
-/* NAVBAR */
 .navbar {
   width: 300px;
   display: flex;
@@ -169,19 +169,16 @@ body {
   list-style: none;
 }
 
-/* LINKS */
 .header a {
   text-decoration: none;
   color: white;
 }
 
-/* BOTÕES */
 .header button {
   font-size: 18px;
   color: white;
 }
 
-/* BOTÃO CADASTRO */
 .btnCadastro {
   width: 166px;
   height: 50px;
@@ -236,8 +233,6 @@ body {
   margin: 0;
 }
 
-/* BANNER */
-
 .banner {
   height: var(--tamanho-banner);
   color: white;
@@ -259,8 +254,6 @@ body {
 .banner .container span {
   font-weight: 800;
 }
-
-/* MISSÃO VISÃO VALORES */
 
 .social {
   background-color: #e5e5e5;
@@ -292,8 +285,6 @@ body {
   align-items: center;
 }
 
-/* FOOTER */
-
 .footer {
   background-color: #32b9cd;
   height: 150px;
@@ -310,8 +301,6 @@ body {
 .footer .container .version {
   font-size: 12px;
 }
-
-/* LOGIN */
 
 .login {
   height: var(--tamanho-login);
@@ -409,8 +398,6 @@ body {
   display: none
 }
 
-/* FORMULARIO */
-
 .alerta_erro{
   display: flex;
   justify-content: flex-end;
@@ -476,8 +463,6 @@ input {
   width: 50px;
 }
 
-/* SIMULADOR */
-
 .simulador {
   color: white;
 }
@@ -487,8 +472,6 @@ input {
   overflow: scroll; 
   height: var(--tamanho-simulador);
 }
-
-/* ALERTA */
 
 #alerta {
   position: absolute;
