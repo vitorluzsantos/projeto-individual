@@ -23,8 +23,8 @@ body {
 
 .container {
   display: flex;
-  width: 80%;
   margin: auto;
+	width: 95%;
 }
 
 .header {
@@ -33,6 +33,8 @@ body {
 	background-color: #2B2B2B;
 	color: white;
 }
+
+
 
 .header button{
 	font-size: 18px;
@@ -56,7 +58,11 @@ body {
 }
 
 .navContent{
-	margin-top: 8px;
+	display: flex;
+	align-items: center;
+	width: 65%;
+	justify-content: flex-end;
+	height: 100%;
 }
 .header .container {
   display: flex;
@@ -69,33 +75,66 @@ body {
   display: flex;
 	height: 440px;
 	color: white;
+	width: 100%;
+	/* border: dashed 2px green; */
 	padding: 50px;
 	gap: 10px;
 }
 
+
+.rightSide{
+	/* border: dashed 2px purple; */
+	width: 70%;
+}
+
+.leftSide {
+	/* border: dashed 2px pink; */
+}
+
 .leftSide img{
-	margin-top: 20px;
+	transform: translateY(20%);
 }
 
 .topCard{
-	margin-bottom: 10px;
+	/* border: dashed 2px yellow; */
 }
 
 .bottomCard{
-	width: 1106px;
-	height: 370px;
-	background-color: #2B2B2B;
-	padding: 30px;
-	text-align: justify;
 	display: flex;
-	border-bottom-left-radius: 20px;
 	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+
+	/* gap: 25px; */
+	text-align: justify;
+	border-bottom-left-radius: 20px;
+	/* border: dashed 2px blue; */
+	background-color: #2B2B2B;
+
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nvim-card-text{
-	font-size: 20px;
-	padding-right: 50px;
+	font-size: 1rem;
+	width: 50%;
 }
+
+.nvim-card-ascii{
+	width: 30%;
+}
+
+.nvim-card-ascii img{
+	width: 200px;
+}
+
+.bottomCard{
+	height: 86%;
+}
+
+.bottomCard pre{
+	font-size: 0.8rem;
+}
+
 
 .wave{
 	margin-top: 200px;
@@ -105,7 +144,7 @@ body {
 
 .navRight {
   display: flex;
-  align-items: center;
+	align-items: center;
   gap: 20px;
 }
 
@@ -119,6 +158,10 @@ body {
 
 .navButtons {
   display: flex;
+}
+
+.navButtons button{
+	cursor: pointer;
 }
 
 .btnCadastro,
@@ -517,3 +560,48 @@ input {
   75%  {transform: rotate(-25deg)}
   100% {transform: rotate(25deg)}
 }
+
+.instalacaoVim{
+	width: 80%;
+	margin: auto;
+	padding-top: 50px;
+}
+
+.instalacaoVim img{
+	margin-bottom: 50px;
+}
+
+.instal-card{
+	background-color: #373737;
+	border-radius: 20px;
+	font-size: 18px;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 20px;
+}
+
+.ic1{
+	width: 700px;
+	height: 350px;
+	padding:50px;
+}
+
+.comandosTerminal{
+	width: 100%;
+	border: solid 2px pink;
+	margin-top: 10px;
+}
+
+
+.caixaTerminal{
+	display: flex;
+	padding-left: 20px;
+	background-color: #161616;
+	height: 50px;
+	border-radius: 20px;
+	color: #21FF30;
+	align-items: center;
+}
+

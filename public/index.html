@@ -19,25 +19,25 @@
 		<div class="header">
 			<div class="container">
 				<div class="navTitulo">
-					<h1 class="titulo">AquaTech</h1>
+					<h1 class="titulo">Neovim</h1>
 				</div>
 				<div class="navContent">
 					<div class="navRight">
 						<a class="navLink" href="#">Pagina Inicial</a>
-
-						<div class="navButtons">
-							<a href="cadastro.html"><button class="btnCadastro">Cadastre-se</button></a>
-							<a href="login.html"><button class="btnLogin">Login</button></a>
-						</div>
-					</div>				</div>
+					</div>				
+				</div>
+				<div class="navButtons">
+					<a href="cadastro.html"><button class="btnCadastro">Cadastre-se</button></a>
+					<a href="login.html"><button class="btnLogin">Login</button></a>
+				</div>
 			</div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-				<img src="assets/imgs/alphaNeovim.png" alt="">
-      </div>
-    </div>
+		</div>
+
+			<div class="banner">
+				<div class="container">
+					<img src="assets/imgs/alphaNeovim.png" alt="">
+				</div>
+			</div>
 
 		<div class="nvim-card">
 			<div class="leftSide">
@@ -48,12 +48,14 @@
 					<h1>O que é o neovim</h1>
 				</div>
 				<div class="bottomCard">
+						
 					<div class="nvim-card-text">
 						<p>O Neovim é um editor de texto que roda no terminal, focado no uso do teclado e na personalização. Ele surgiu como uma evolução do Vim, derivado do Vi.</p>
 						<p>É leve, rápido e totalmente configurável, permitindo que cada usuário crie seu próprio ambiente de trabalho sem depender do mouse.</p>
 						
 					</div>
-					<pre>
+					<div class="nvim-card-ascii">
+						<pre>
         ________   +    ________
        /VVVVVVVV\++++  /VVVVVVVV\
        \VVVVVVVV/++++++\VVVVVVVV/
@@ -69,30 +71,71 @@
         |VVV/'+++++++++
         'V/'   ++++++
                  ++
-</pre>
+						</pre>
+					</div>
 				</div>
 			</div>
 		</div>
   
 		<section class="wave">
-			<div class="nvim-card">
-				<div class="leftSide">
-					<img src="assets/imgs/setaCard.png">
+		<div class="nvim-card" style="width: 1600px;">
+			<div class="leftSide">
+				<img src="assets/imgs/setaCard.png">
+			</div>
+			<div class="rightSide">
+				<div class="topCard">
+					<h1>Por que usar o Neovim</h1>
 				</div>
-				<div class="rightSide">
-					<div class="topCard">
-						<h1>Porque usar o neovim</h1>
+				<div class="bottomCard">
+						
+					<div class="nvim-card-text">
+						<p>Usar o Neovim é ideal para quem busca mais controle e eficiência. Ele permite trabalhar quase totalmente pelo teclado, tornando a edição de código mais rápida com o tempo.
+Além disso, é leve e altamente personalizável, utilizando Lua para suas configurações. Lua também é usada na plataforma Roblox e é conhecida por ser uma linguagem simples e fácil de aprender, o que facilita na hora de criar plugins, atalhos e adaptar o editor ao seu próprio estilo.</p>
 					</div>
-					<div class="bottomCard">
-						<div class="nvim-card-text">
-							<p>Usar o Neovim é ideal para quem busca mais controle e eficiência. Ele permite trabalhar quase totalmente pelo teclado, tornando a edição de código mais rápida com o tempo.
-	Além disso, é leve e altamente personalizável, utilizando Lua para suas configurações. Lua também é usada na plataforma Roblox e é conhecida por ser uma linguagem simples e fácil de aprender, o que facilita na hora de criar plugins, atalhos e adaptar o editor ao seu próprio estilo.</p>
-						</div>
+					<div class="nvim-card-ascii">
 						<img src="assets/imgs/logoLua.png" alt="">
 					</div>
 				</div>
 			</div>
+		</div>
 			
+		<div class="nvim-card" style="flex-direction: row-reverse;">
+			<div class="leftSide">
+				<img src="assets/imgs/setaEsquerda.png">
+			</div>
+			<div class="rightSide">
+				<div class="topCard">
+					<h1 style="direction: rtl;">VsCode VS Neovim</h1>
+				</div>
+				<div class="bottomCard" style="border-radius: 0; border-bottom-right-radius: 20px;">
+						
+					<div class="nvim-card-text">
+						<p>O Neovim é um editor de texto que roda no terminal, focado no uso do teclado e na personalização. Ele surgiu como uma evolução do Vim, derivado do Vi.</p>
+						<p>É leve, rápido e totalmente configurável, permitindo que cada usuário crie seu próprio ambiente de trabalho sem depender do mouse.</p>
+						
+					</div>
+					<div class="nvim-card-ascii">
+						<img src="assets/imgs/logoVsCode.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+		</section>
+		<section class="instalacaoVim">
+			<img src="assets/imgs/logoVim.png" alt="">
+			<div class="instal-card ic1">
+				<p>Para instalar o neovim no seu computador acesse o terminal e digite</p>
+				<div>
+					<p>Windows</p>
+					<div class="caixaTerminal">
+						<p>winget install neovim</p>
+					</div>
+					<p>Linux</p>
+					<div class="caixaTerminal">
+						<p>sudo apt install neovim</p>
+					</div>
+				</div>
+			</div>
 		</section>
   </body>
 
