@@ -6,12 +6,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>AquaTech | Página Inicial</title>
+		<title>Neovim</title>
 
 		<script src="./js/sessao.js"></script>
 
 		<link rel="stylesheet" href="./css/estilo.css">
-		<link rel="icon" href="./assets/icon/favicon2.ico">
+		<link rel="icon" href="./assets/imgs/logoVim.png">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 	</head>
 
@@ -78,7 +78,7 @@
 		</div>
   
 		<section class="wave">
-		<div class="nvim-card" style="width: 1600px;">
+		<div class="nvim-card" >
 			<div class="leftSide">
 				<img src="assets/imgs/setaCard.png">
 			</div>
@@ -125,14 +125,187 @@ Além disso, é leve e altamente personalizável, utilizando Lua para suas confi
 			<img src="assets/imgs/logoVim.png" alt="">
 			<div class="instal-card ic1">
 				<p>Para instalar o neovim no seu computador acesse o terminal e digite</p>
-				<div>
+				<div class="sistemaCaixa">
 					<p>Windows</p>
 					<div class="caixaTerminal">
-						<p>winget install neovim</p>
+						<span>winget install neovim</span>
 					</div>
+				</div>
+				<div class="sistemaCaixa">
 					<p>Linux</p>
 					<div class="caixaTerminal">
-						<p>sudo apt install neovim</p>
+						<span>sudo apt install neovim</span>
+				</div>
+				</div>
+			</div>
+			<div class="container-nvim-tutor">
+				<div class="nvim-tutor-titulo">
+					<h1>Com o neovim ja instalado para abrir digite no terminal nvim e de enter_</h1>
+				</div>
+				<div class="nvim-tutor">
+					<img src="assets/imgs/nvim-tutor-1.png">
+					<p>Ao acessar o vim pela primeira vez ele terá essa aparência <br><br>Para sair do neovim é necessario acessar o modo de comando através da tecla “:”<br><br>O comando para sair do neovim é :q de ‘quit’</p>
+				</div>
+			</div>
+
+			<div class="container-nvim-tutor">
+				<div class="nvim-tutor-titulo">
+					<h1>Para você aprender o uso das diferentes vim é possível acessar o tutorial do vim através do comando <br>:Tutor</h1>
+				</div>
+				<div class="nvim-tutor">
+					<img src="assets/imgs/nvim-tutor-2.png">
+					<p>Aqui no tutorial você pode aprender todo o básico de neovim para você se movimentar pelo texto</p>
+				</div>
+			</div>
+
+		</section>
+		<section class="vim-config">
+			<div class="vim-config-titulo">
+				<h1>Sua NeoVim Config</h1>
+			</div>
+			<div class="vim-config-margin">
+				<div class="vim-config-subtitulo">
+					<p>
+						Para criar a sua própria configuração do vim você deve criar um arquivo de configuração na sua pasta raiz do neovim
+					</p>
+				</div>
+				<div class="instal-card ic1">
+					<p>Para isso você deve acessar sua pasta raiz de configuração</p>
+					<div class="sistemaCaixa">
+						<p>Windows</p>
+						<div class="caixaTerminal">
+							<span>cd ~/appdata/local/</span>
+						</div>
+					</div>
+					<div class="sistemaCaixa">
+						<p>Linux</p>
+						<div class="caixaTerminal">
+							<span>cd ~/.config/</span>
+					</div>
+				</div>
+			</div>
+				<div class="vim-config-subtitulo">
+					<p>
+						Dentro da pasta raiz você deve criar um diretório com o nome ‘nvim’ com um arquivo de inicialização chamado ‘init.lua’
+					</p>
+				</div>
+				<div class="config-container">
+					<div class="instal-card ic2">
+						<p>Para isso você deve acessar digitar o comando</p>
+						<div class="sistemaCaixa">
+							<div class="caixaTerminal">
+								<span>nvim nvim/init.lua</span>
+							</div>
+						</div>
+					</div>
+					<div class="config-text-area">
+						<p>Após esse comando o nvim será aberto dentro do arquivo de configuração que é feito na linguagem lua</p>
+						<p>Dentro desse arquivo você pode construir diversas configurações ou você pode importar de outras pessoas clonando o repositório da configuração de alguém através do GitHub</p>
+					</div>
+
+			</div>
+				<div class="vim-config-subtitulo">
+					<p>Dentro da pasta raiz delete o diretório ‘nvim’</p>
+				</div>
+				<div class="del-tutor-container">
+					<div class="instal-card step1">
+						<div class="container-steps">
+							<img src="assets/imgs/step2.png" alt="">
+							<p>Para isso você deve acessar sua pasta raiz</p>
+						</div>
+						<div class="sistemaCaixa">
+							<p>Windows</p>
+							<div class="caixaTerminal">
+								<span>cd ~/appdata/local/</span>
+							</div>
+							<div class="caixaTerminal">
+								<span>del nvim/</span>
+							</div>
+						</div>
+						<div class="sistemaCaixa">
+							<p>Linux</p>
+							<div class="caixaTerminal">
+								<span>cd ~/.config/</span>
+							</div>
+							<div class="caixaTerminal">
+								<span>rm nvim/</span>
+							</div>
+
+						</div>
+					</div>
+				<div class="instal-card step2">
+						<div class="container-steps">
+							<img src="assets/imgs/step2.png" alt="">
+							<p>Após isso clone o repositório da minha configuração</p>
+						</div>
+					<div class="sistemaCaixa">
+						<div class="caixaTerminal">
+							<span>git clone https://github.com/vitrlz/nvim.git</span>
+						</div>
+					</div>
+					<p>ou</p>
+					<div class="sistemaCaixa">
+						<div class="caixaTerminal">
+							<span>https://github.com/nvim-lua/kickstart.nvim.git</span>
+					</div>
+							<div class="div-kickstart">
+								<div class="kickstart-esquerdo">
+									<img src="assets/imgs/linhaKickstart.png" alt="">
+								</div>
+								<div class="kickstart-direito">
+									<p>nesse caso lembre de renomear a pasta ‘kickstart.nvim’ para ‘nvim’</p>
+									<div class="caixaTerminal">
+										<span>mv kickstart.nvim nvim</span>
+									</div>
+								</div>
+								
+							</div>
+					</div>
+		</section>
+		<section class="inspiracoes">
+			<div class="vim-config-margin">
+				<div class="vim-config-subtitulo">
+					<p>E pronto quando você abrir o neovim com ‘nvim’ seu setup será configurado sózinho!</p>
+				</div>
+				<div class="container-inspiracao">
+					<div class="card-inspiracao">
+						<div class="container-titulo-insp">
+							<p>Repositorios de configurações</p>
+						</div>
+						<div class="container-btns">
+							<a href="#">
+								<div class="btn-card-inspiracao">
+									<p>Repositorio da minha config </p>
+									<img src="assets/imgs/logoGithub.png" alt="">
+								</div>
+							</a>
+							<a href="#">
+								<div class="btn-card-inspiracao">
+									<p>Repositorio do kickstart</p>
+									<img src="assets/imgs/logoGithub.png" alt="">
+								</div>
+							</a>
+						</div>
+					</div>
+					
+					<div class="card-inspiracao">
+						<div class="container-titulo-insp">
+							<p>Canais que me inspiram a usar o vim</p>
+						</div>
+						<div class="container-btns">
+							<a href="#">
+								<div class="btn-card-inspiracao">
+									<p>Canal do TJ dev</p>
+									<img src="assets/imgs/logoYoutube.png" alt="">
+								</div>
+							</a>
+							<a href="#">
+								<div class="btn-card-inspiracao">
+									<p>Canal do Primeagen</p>
+									<img src="assets/imgs/logoYoutube.png" alt="">
+								</div>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
