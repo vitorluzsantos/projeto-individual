@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+	<head>
+		<link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>AquaTech | Quiz</title>
+
+		<link rel="stylesheet" href="./../css/dashboards.css">
+		<link rel="stylesheet" href="./../css/estilo.css" />
+		<script src="../js/sessao.js"></script>
+
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	</head>
+
+	<body onload="onloadEsconder()">
+		<div class="janela">
+			<div class="header-left">
+				<h1>AquaTech</h1>
+
+				<div class="hello">
+					<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+				</div>
+
+				<div class="btn-nav-white">
+					<a href="./cards.html"><h3>Pessoal</h3></a>
+				</div>
+
+				<div class="btn-nav-white">
+					<a href="./dashboard.html"><h3>Geral</h3></a>
+				</div>
+
+				<div class="btn-nav">
+					<h3>Quiz</h3>
+				</div>
+
+				<div class="btn-logout" onclick="limparSessao()">
+					<h3>Sair</h3>
+				</div>
+			</div>
+
+			<div class="dash">
+				<div id="pontuacaoEJogo">
+					<img src="../assets/imgs/alphaNeovim.png" alt="">
+
+					<button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+
+					<div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+						<div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
+							<span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
+							<span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+						</div>
+						<div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
+							<span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
+								<span id="spanPontuacaoFinal">***</span>
+							</span>
+							<span id="msgFinal" class="width-fit-content">***</span>
+						</div>
+					</div>
+
+					<div id="jogo" class="width-fit-content flex-colunar border-secondary">
+						<div id="infoQuestao" class="padding-8">
+							<span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span> questões.</span>
+						</div>
+						<div id="perguntaDaQuestaoAtual" class="padding-8">
+							<span id="spanQuestaoExibida" class="text-bold"></span>
+						</div>
+						<div id="infoAlternativas" class="padding-8">
+							<span><em>Escolha uma opção dentre as abaixo:</em></span>
+						</div>
+						<div id="opcoes" class="flex-colunar padding-8">
+							<span>
+								<input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+								<label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+							</span>
+							<span>
+								<input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+								<label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+							</span>
+							<span>
+								<input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+								<label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+							</span>
+							<span>
+								<input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+								<label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+							</span>
+						</div>
+						<div id="botoes" class="flex-colunar padding-8">
+							<button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+							<button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+							<button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script>
+let listaDeQuestoes = []
+let idPartidaAtual = null
+let numeroDaQuestaoAtual = 0
+let pontuacaoFinal = 0
+let tentativaIncorreta = 0
+let certas = 0
+let erradas = 0
+let quantidadeDeQuestoes = 0
+
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO
+
+function getIdUsuario() {
+	return sessionStorage.getItem("ID_USUARIO")
+}
+
+async function carregarQuestoes() {
+	const resp = await fetch("/quiz/questoes")
+	if (!resp.ok) throw new Error("Erro ao buscar questões")
+	const dados = await resp.json()
+	listaDeQuestoes = dados.map(q => ({
+		id_questao:         q.id_questao,
+		pergunta:           q.enunciado,
+		alternativaA:       q.alternativa_a,
+		alternativaB:       q.alternativa_b,
+		alternativaC:       q.alternativa_c,
+		alternativaD:       q.alternativa_d,
+		alternativaCorreta: q.alternativa_correta
+	}))
+	quantidadeDeQuestoes = listaDeQuestoes.length
+}
+
+async function criarPartida() {
+	const idUsuario = getIdUsuario()
+	if (!idUsuario) { alert("Usuário não autenticado."); return null }
+	const resp = await fetch("/quiz/iniciar", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ idUsuario })
+	})
+	if (!resp.ok) throw new Error("Erro ao criar partida")
+	const dados = await resp.json()
+	return dados.idPartida
+}
+
+function registrarResposta(idQuestao, alternativaEscolhida, acertou) {
+	if (!idPartidaAtual) return
+	fetch("/quiz/resposta", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ idPartida: idPartidaAtual, idQuestao, alternativaEscolhida, acertou })
+	})
+}
+
+async function salvarPlacarFinal() {
+	if (!idPartidaAtual) return
+	await fetch("/quiz/finalizar", {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ idPartida: idPartidaAtual, qtdAcertos: certas, qtdErros: erradas, pontuacao: pontuacaoFinal })
+	})
+}
+
+async function onloadEsconder() {
+	document.getElementById('pontuacao').style.display = "none"
+	document.getElementById('jogo').style.display = "none"
+	await carregarQuestoes()
+}
+
+async function iniciarQuiz() {
+	if (listaDeQuestoes.length === 0) { alert("Nenhuma questão encontrada no banco."); return }
+
+	idPartidaAtual = await criarPartida()
+	if (!idPartidaAtual) return
+
+	numeroDaQuestaoAtual = 0
+	pontuacaoFinal = 0; tentativaIncorreta = 0; certas = 0; erradas = 0
+
+	document.getElementById('pontuacao').style.display = "flex"
+	document.getElementById('jogo').style.display = "flex"
+	document.getElementById('btnIniciarQuiz').style.display = "none"
+	document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
+
+	preencherHTMLcomQuestaoAtual(0)
+	btnSubmeter.disabled = false
+	btnProx.disabled = true
+	btnTentarNovamente.disabled = true
+}
+
+function preencherHTMLcomQuestaoAtual(index) {
+	habilitarAlternativas(true)
+	const questaoAtual = listaDeQuestoes[index]
+	numeroDaQuestaoAtual = index
+	document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
+	document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta
+	document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA
+	document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB
+	document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC
+	document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD
+}
+
+function submeter() {
+	const options = document.getElementsByName("option")
+	let hasChecked = false
+	for (let i = 0; i < options.length; i++) {
+		if (options[i].checked) { hasChecked = true; break }
+	}
+	if (!hasChecked) {
+		alert("Não há alternativas escolhidas. Escolha uma opção.")
+	} else {
+		btnSubmeter.disabled = true
+		btnProx.disabled = false
+		habilitarAlternativas(false)
+		checarResposta()
+	}
+}
+
+function habilitarAlternativas(trueOrFalse) {
+	primeiraOpcao.disabled = !trueOrFalse
+	segundaOpcao.disabled  = !trueOrFalse
+	terceiraOpcao.disabled = !trueOrFalse
+	quartaOpcao.disabled   = !trueOrFalse
+}
+
+function avancar() {
+	btnProx.disabled     = true
+	btnSubmeter.disabled = false
+	desmarcarRadioButtons()
+	if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+		preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+	} else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
+		alert("Atenção... a próxima é a ultima questão!")
+		preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+	} else {
+		finalizarJogo()
+	}
+	limparCoresBackgroundOpcoes()
+}
+
+function tentarNovamente() {
+	window.location.reload()
+}
+
+function checarResposta() {
+	const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]
+	const respostaQuestaoAtual = questaoAtual.alternativaCorreta
+	const options = document.getElementsByName("option")
+
+	let alternativaCorreta = null
+	let alternativaEscolhida = null
+	let acertou = false
+
+	options.forEach((option) => {
+		if (option.value === respostaQuestaoAtual) {
+			alternativaCorreta = option.labels[0].id
+		}
+	})
+
+	options.forEach((option) => {
+		if (option.checked && option.value === respostaQuestaoAtual) {
+			document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
+			pontuacaoFinal++; certas++
+			document.getElementById("spanCertas").innerHTML = certas
+			alternativaEscolhida = option.value
+			acertou = true
+			numeroDaQuestaoAtual++
+		} else if (option.checked && option.value !== respostaQuestaoAtual) {
+			document.getElementById(option.labels[0].id).classList.add("text-danger-with-bg")
+			document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
+			tentativaIncorreta++; erradas++
+			document.getElementById("spanErradas").innerHTML = erradas
+			alternativaEscolhida = option.value
+			acertou = false
+			numeroDaQuestaoAtual++
+		}
+	})
+
+	if (alternativaEscolhida !== null) {
+		registrarResposta(questaoAtual.id_questao, alternativaEscolhida, acertou)
+	}
+}
+
+function limparCoresBackgroundOpcoes() {
+	document.getElementsByName("option").forEach((option) => {
+		document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg", "text-success-with-bg")
+	})
+}
+
+function desmarcarRadioButtons() {
+	document.getElementsByName("option").forEach(o => o.checked = false)
+}
+
+async function finalizarJogo() {
+	await salvarPlacarFinal()
+
+	const porcentagem = pontuacaoFinal / quantidadeDeQuestoes
+	let texto, classe
+
+	if (porcentagem <= 0.3) {
+		texto = "Parece que você não estudou..."
+		classe = "text-danger-with-bg"
+	} else if (porcentagem < 0.9) {
+		texto = "Pode melhorar na próxima, hein!"
+		classe = "text-warning-with-bg"
+	} else {
+		texto = "Uau, parabéns!"
+		classe = "text-success-with-bg"
+	}
+
+	texto += "<br> Você acertou " + Math.round(porcentagem * 100) + "% das questões."
+
+	document.getElementById('msgFinal').innerHTML = texto
+	document.getElementById('msgFinal').classList.add(classe)
+	document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+	document.getElementById('jogo').classList.add("text-new-gray")
+
+	btnProx.disabled = true
+	btnSubmeter.disabled = true
+	btnTentarNovamente.disabled = false
+}
+</script>
