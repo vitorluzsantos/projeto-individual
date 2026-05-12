@@ -916,3 +916,36 @@ a{
 	margin: 25px;
 	cursor: pointer;
 }
+
+/* css das duas dash */
+.card-dash-stat {
+	background: #1e241e;
+	border: 1px solid #2a3a2a;
+	border-radius: 8px;
+	padding: 14px 24px;
+	text-align: center;
+	min-width: 120px;
+}
+
+.card-dash-valor {
+	font-size: 28px;
+	font-weight: 700;
+	color: #c8d8c8;
+	margin: 0;
+}
+
+.card-dash-label {
+	font-size: 10px;
+	color: #4a6a4a;
+	margin: 4px 0 0 0;
+}
+
+/* css da dash pessoal */
+.pessoal-questao-status{
+	display:flex;
+	align-items:center;
+	gap:10px;
+	padding:8px 0;
+	border-bottom:1px solid #2a3a2a;
+	font-size:12px;color:#c8d8c8;
+}

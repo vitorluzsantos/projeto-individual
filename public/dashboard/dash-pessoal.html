@@ -32,7 +32,7 @@
 				<h3>Pessoal</h3>
 			</div>
 			<div class="btn-nav-white">
-				<a href="./dashboard.html"><h3>Geral</h3></a>
+				<a href="./dash-geral.html"><h3>Geral</h3></a>
 			</div>
 			<div class="btn-nav-white">
 				<a href="./quiz.html"><h3>Quiz</h3></a>
@@ -213,17 +213,16 @@
 
 		el.innerHTML = '';
 		questoes.forEach(function(q, index) {
-			var acertou = q.acertou == 1 || q.acertou === true;
-			var cor     = acertou ? '#4ecca3' : '#e05a5a';
-			var icone   = acertou ? 'fa-circle-check' : 'fa-circle-xmark';
-			var texto   = acertou ? 'acerto' : 'erro';
+			let acertou = q.acertou == 1 || q.acertou === true;
+			let cor = acertou ? '#4ecca3' : '#e05a5a';
+			let texto = acertou ? 'acerto' : 'errou';
 
 			el.innerHTML += `
-				<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #2a3a2a;font-size:12px;color:#c8d8c8;">
+				<div class="pessoal-questao-status" >
 					<span style="color:#4a6a4a;width:18px;flex-shrink:0;">${index + 1}</span>
 					<span style="flex:1;">${q.enunciado}</span>
 					<span style="color:${cor};flex-shrink:0;">
-						<i class="fa-solid ${icone}"></i> ${texto}
+						 ${texto}
 					</span>
 				</div>
 			`;
@@ -231,24 +230,3 @@
 	}
 </script>
 
-<style>
-	.card-dash-stat {
-		background: #1e241e;
-		border: 1px solid #2a3a2a;
-		border-radius: 8px;
-		padding: 14px 24px;
-		text-align: center;
-		min-width: 110px;
-	}
-	.card-dash-valor {
-		font-size: 28px;
-		font-weight: 700;
-		color: #c8d8c8;
-		margin: 0;
-	}
-	.card-dash-label {
-		font-size: 10px;
-		color: #4a6a4a;
-		margin: 4px 0 0 0;
-	}
-</style>
