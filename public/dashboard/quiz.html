@@ -8,104 +8,107 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>AquaTech | Quiz</title>
 
-	<link rel="stylesheet" href="./../css/dashboards.css">
-	<link rel="stylesheet" href="./../css/estilo.css">
+	<!-- <link rel="stylesheet" href="./../css/dashboards.css"> -->
+	<!-- <link rel="stylesheet" href="./../css/estilo.css"> -->
 	<link rel="stylesheet" href="./../css/quiz.css">
+	<link rel="stylesheet" href="./../css/header-left.css">
 	<script src="../js/sessao.js"></script>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 
-<body onload="onloadEsconder()">
-	<div class="janela">
-
-		<div class="header-left">
-			<h1>AquaTech</h1>
-			<div class="hello">
-				<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-			</div>
-			<div class="btn-nav-white">
-				<a href="./dash-pessoal.html"><h3>Pessoal</h3></a>
-			</div>
-			<div class="btn-nav-white">
-				<a href="./dash-geral.html"><h3>Geral</h3></a>
-			</div>
-			<div class="btn-nav">
-				<h3>Quiz</h3>
-			</div>
-			<div class="btn-logout" onclick="limparSessao()">
-				<h3>Sair</h3>
-			</div>
-		</div>
-
-		<div class="dash">
-			<div class="container-margin">
-				<div class="quiz-box">
-
-					<div id="telaInicio" class="quiz-inicio">
-						<img src="../assets/imgs/alphaNeovim.png" alt="NeoVim">
-						<h2>Quiz NeoVim</h2>
-						<button class="quiz-btn" style="width:240px" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+	<body onload="onloadEsconder()">
+		<div class="container-quiz">
+			<div class="aside-container">
+				<div class="header-left">
+					<h1>Neovim</h1>
+					<div class="hello">
+						<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
 					</div>
-
-					<div id="placar" class="quiz-placar" style="display:none">
-						<div class="quiz-placar-item acertos">
-							acertos: <span class="valor" id="spanCertas">0</span>
-						</div>
-						<div class="quiz-placar-item erros">
-							erros: <span class="valor" id="spanErradas">0</span>
-						</div>
+					<div class="btn-nav-white">
+						<a href="./dash-pessoal.html"><h3>Pessoal</h3></a>
 					</div>
-
-					<div id="jogo" style="display:none">
-						<div class="quiz-header" id="spanQuestaoExibida"></div>
-						<div class="quiz-card">
-							<div class="quiz-progresso">
-								Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-							</div>
-							<div class="quiz-opcoes">
-								<label class="quiz-opcao" id="opcaoA" onclick="selecionarOpcao(this)">
-									<input type="radio" name="option" value="alternativaA" id="primeiraOpcao">
-									<span class="quiz-letra">A</span>
-									<span class="quiz-opcao-texto" id="labelOpcaoUm"></span>
-								</label>
-								<label class="quiz-opcao" id="opcaoB" onclick="selecionarOpcao(this)">
-									<input type="radio" name="option" value="alternativaB" id="segundaOpcao">
-									<span class="quiz-letra">B</span>
-									<span class="quiz-opcao-texto" id="labelOpcaoDois"></span>
-								</label>
-								<label class="quiz-opcao" id="opcaoC" onclick="selecionarOpcao(this)">
-									<input type="radio" name="option" value="alternativaC" id="terceiraOpcao">
-									<span class="quiz-letra">C</span>
-									<span class="quiz-opcao-texto" id="labelOpcaoTres"></span>
-								</label>
-								<label class="quiz-opcao" id="opcaoD" onclick="selecionarOpcao(this)">
-									<input type="radio" name="option" value="alternativaD" id="quartaOpcao">
-									<span class="quiz-letra">D</span>
-									<span class="quiz-opcao-texto" id="labelOpcaoQuatro"></span>
-								</label>
-							</div>
-							<div class="quiz-botoes">
-								<button class="quiz-btn" id="btnSubmeter" onclick="submeter()">Submeter resposta</button>
-								<button class="quiz-btn" id="btnProx" onclick="avancar()" disabled>Avançar para proxima questão</button>
-								<button class="quiz-btn btn-full" id="btnTentarNovamente" onclick="tentarNovamente()" disabled>tentar novamente</button>
-							</div>
-						</div>
+					<div class="btn-nav-white">
+						<a href="./dash-geral.html"><h3>Geral</h3></a>
 					</div>
-
-					<div id="telaResultado" class="quiz-resultado" style="display:none">
-						<div class="pontuacao-final"><span id="spanPontuacaoFinal">0</span>/<span id="spanTotalQuestoes">0</span></div>
-						<div id="msgFinal" class="mensagem-final"></div>
-						<button class="quiz-btn" style="max-width:240px;margin:0 auto" onclick="tentarNovamente()">Tentar novamente</button>
+					<div class="btn-nav">
+						<h3>Quiz</h3>
 					</div>
-
+					<div class="btn-logout" onclick="limparSessao()">
+						<h3>Sair</h3>
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
-</body>
+			<div class="main-container">
+				<div class="container-margin">
+					<div class="quiz-box">
+
+						<div id="telaInicio" class="quiz-inicio">
+							<img src="../assets/imgs/alphaNeovim.png" alt="NeoVim">
+							<h2>Quiz NeoVim</h2>
+							<button class="quiz-btn" style="width:240px" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+						</div>
+
+						<div id="placar" class="quiz-placar" style="display:none">
+							<div class="quiz-placar-item acertos">
+								acertos: <span class="valor" id="spanCertas">0</span>
+							</div>
+							<div class="quiz-placar-item erros">
+								erros: <span class="valor" id="spanErradas">0</span>
+							</div>
+						</div>
+
+						<div id="jogo" style="display:none">
+							<div class="quiz-header" id="spanQuestaoExibida"></div>
+							<div class="quiz-card">
+								<div class="quiz-progresso">
+									Questão <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
+								</div>
+								<div class="quiz-opcoes">
+									<label class="quiz-opcao" id="opcaoA" onclick="selecionarOpcao(this)">
+										<input type="radio" name="option" value="alternativaA" id="primeiraOpcao">
+										<span class="quiz-letra">A</span>
+										<span class="quiz-opcao-texto" id="labelOpcaoUm"></span>
+									</label>
+									<label class="quiz-opcao" id="opcaoB" onclick="selecionarOpcao(this)">
+										<input type="radio" name="option" value="alternativaB" id="segundaOpcao">
+										<span class="quiz-letra">B</span>
+										<span class="quiz-opcao-texto" id="labelOpcaoDois"></span>
+									</label>
+									<label class="quiz-opcao" id="opcaoC" onclick="selecionarOpcao(this)">
+										<input type="radio" name="option" value="alternativaC" id="terceiraOpcao">
+										<span class="quiz-letra">C</span>
+										<span class="quiz-opcao-texto" id="labelOpcaoTres"></span>
+									</label>
+									<label class="quiz-opcao" id="opcaoD" onclick="selecionarOpcao(this)">
+										<input type="radio" name="option" value="alternativaD" id="quartaOpcao">
+										<span class="quiz-letra">D</span>
+										<span class="quiz-opcao-texto" id="labelOpcaoQuatro"></span>
+									</label>
+								</div>
+								<div class="quiz-botoes">
+									<button class="quiz-btn" id="btnSubmeter" onclick="submeter()">Submeter resposta</button>
+									<button class="quiz-btn" id="btnProx" onclick="avancar()" disabled>Avançar para proxima questão</button>
+									<button class="quiz-btn btn-full" id="btnTentarNovamente" onclick="tentarNovamente()" disabled>tentar novamente</button>
+								</div>
+							</div>
+						</div>
+
+						<div id="telaResultado" class="quiz-resultado" style="display:none">
+							<div class="pontuacao-final"><span id="spanPontuacaoFinal">0</span>/<span id="spanTotalQuestoes">0</span></div>
+							<div id="msgFinal" class="mensagem-final"></div>
+							<button class="quiz-btn" style="max-width:240px;margin:0 auto" onclick="tentarNovamente()">Tentar novamente</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</body>
 </html>
 
 <script>

@@ -1,0 +1,19 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'JetBrains Mono';
+}
+
+.container-dash-pessoal{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+}
+
+.aside-container{
+	width: 20%;
+}
+
+.main-container{
+	width: 80%;
+}

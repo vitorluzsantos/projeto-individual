@@ -147,9 +147,9 @@ function preencherCards(dados) {
 		? Math.round(totalAcertos / (totalAcertos + totalErros) * 100)
 		: 0;
 
-	document.getElementById('totalPartidas').textContent = totalPartidas;
-	document.getElementById('totalAcertos').textContent  = totalAcertos;
-	document.getElementById('taxaGeral').textContent     = taxa + '%';
+	document.getElementById('totalPartidas').innerHTML = totalPartidas;
+	document.getElementById('totalAcertos').innerHTML  = totalAcertos;
+	document.getElementById('taxaGeral').innerHTML     = taxa + '%';
 	document.getElementById('taxaGeral').style.color     = taxa >= 60 ? '#4ecca3' : '#e05a5a';
 }
 
@@ -181,12 +181,10 @@ function plotarBarras(dados) {
 function plotarDonut(dados) {
 	var totalAcertos = dados.reduce(function(s, u) { return s + Number(u.total_acertos); }, 0);
 	var totalErros   = dados.reduce(function(s, u) { return s + Number(u.total_erros); }, 0);
-	var taxa = (totalAcertos + totalErros) > 0
-		? Math.round(totalAcertos / (totalAcertos + totalErros) * 100)
-		: 0;
+	var taxa = (totalAcertos + totalErros) > 0 ? Math.round(totalAcertos / (totalAcertos + totalErros) * 100) : 0;
 
-	document.getElementById('pctAcertos').textContent = taxa + '%';
-	document.getElementById('pctErros').textContent   = (100 - taxa) + '%';
+	document.getElementById('pctAcertos').innerHTML = taxa + '%';
+	document.getElementById('pctErros').innerHTML   = (100 - taxa) + '%';
 
 	new Chart(document.getElementById('chartDonut'), {
 		type: 'doughnut',

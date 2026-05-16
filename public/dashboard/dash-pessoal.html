@@ -1,232 +1,228 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-	<link rel="shortcut icon" href="../assets/imgs/logoVim.png" type="image/x-icon">
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Neovim Quiz | Dashboard Pessoal</title>
+	<head>
+		<link rel="shortcut icon" href="../assets/imgs/logoVim.png" type="image/x-icon">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Neovim Quiz | Dashboard Pessoal</title>
 
-	<link rel="stylesheet" href="./../css/dashboards.css">
-	<link rel="stylesheet" href="./../css/estilo.css" />
-	<script src="../js/sessao.js"></script>
+		<!-- <link rel="stylesheet" href="./../css/dashboards.css"> -->
+		<!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="./../css/header-left.css" />
+		<link rel="stylesheet" href="./../css/dash-pessoal.css" />
+		<script src="../js/sessao.js"></script>
 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
-</head>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
-<body onload="validarSessao(); carregarDashboardPessoal();">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+	</head>
 
-	<div class="janela">
-
-		<div class="header-left">
-			<h1>Neovim</h1>
-			<div class="hello">
-				<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+	<body onload="validarSessao(); carregarDashboardPessoal();">
+		<div class="container-dash-pessoal">
+			<div class="aside-container">
+				<div class="header-left">
+					<h1>Neovim</h1>
+					<div class="hello">
+						<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+					</div>
+					<div class="btn-nav">
+						<h3>Pessoal</h3>
+					</div>
+					<div class="btn-nav-white">
+						<a href="./dash-geral.html"><h3>Geral</h3></a>
+					</div>
+					<div class="btn-nav-white">
+						<a href="./quiz.html"><h3>Quiz</h3></a>
+					</div>
+					<div class="btn-logout" onclick="limparSessao()">
+						<h3>Sair</h3>
+					</div>
+				</div>
 			</div>
-			<div class="btn-nav">
-				<h3>Pessoal</h3>
+			<div class="main-container">
+
+				<!-- Cards de resumo -->
+				<div style="display:flex;justify-content:center;gap:16px;margin:30px 0 10px;flex-wrap:wrap;">
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="cardAcertos" style="color:#4ecca3">--</p>
+						<p class="card-dash-label">acertos</p>
+					</div>
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="cardErros" style="color:#e05a5a">--</p>
+						<p class="card-dash-label">erros</p>
+					</div>
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="cardTaxa">--%</p>
+						<p class="card-dash-label">taxa de acerto</p>
+					</div>
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="cardPartidas">--</p>
+						<p class="card-dash-label">partidas</p>
+					</div>
+				</div>
+
+				<!-- Posição no ranking -->
+				<h3 class="tituloGraficos" style="margin-top:20px;">Posição no ranking</h3>
+				<div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:20px;">
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="posicaoRanking" style="color:#4ecca3;">--º</p>
+						<p class="card-dash-label">lugar geral</p>
+					</div>
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="melhorPontuacao">--</p>
+						<p class="card-dash-label">melhor pontuação</p>
+					</div>
+					<div class="card-dash-stat">
+						<p class="card-dash-valor" id="mediaPontuacao">--</p>
+						<p class="card-dash-label">pontuação média</p>
+					</div>
+				</div>
+
+				<!-- Gráfico de linha: evolução de pontuação -->
+				<h3 class="tituloGraficos" style="margin-top:10px;">Evolução de pontuação</h3>
+				<div class="graph">
+					<canvas id="chartEvolucao"></canvas>
+				</div>
+				<div class="label-captura">
+					<p id="avisoEvolucao" style="color:white"></p>
+				</div>
+
+				<!-- Questões da última partida -->
+				<h3 class="tituloGraficos" style="margin-top:30px;">Desempenho por questão — última partida</h3>
+				<div id="listaQuestoes" style="width:70%;margin:0 auto 40px;"></div>
+				<div class="label-captura">
+					<p id="avisoQuestoes" style="color:white"></p>
+				</div>
+
 			</div>
-			<div class="btn-nav-white">
-				<a href="./dash-geral.html"><h3>Geral</h3></a>
-			</div>
-			<div class="btn-nav-white">
-				<a href="./quiz.html"><h3>Quiz</h3></a>
-			</div>
-			<div class="btn-logout" onclick="limparSessao()">
-				<h3>Sair</h3>
-			</div>
+
 		</div>
 
-		<div class="dash">
-
-			<!-- Cards de resumo -->
-			<div style="display:flex;justify-content:center;gap:16px;margin:30px 0 10px;flex-wrap:wrap;">
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="cardAcertos" style="color:#4ecca3">--</p>
-					<p class="card-dash-label">acertos</p>
-				</div>
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="cardErros" style="color:#e05a5a">--</p>
-					<p class="card-dash-label">erros</p>
-				</div>
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="cardTaxa">--%</p>
-					<p class="card-dash-label">taxa de acerto</p>
-				</div>
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="cardPartidas">--</p>
-					<p class="card-dash-label">partidas</p>
-				</div>
-			</div>
-
-			<!-- Posição no ranking -->
-			<h3 class="tituloGraficos" style="margin-top:20px;">Posição no ranking</h3>
-			<div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:20px;">
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="posicaoRanking" style="color:#4ecca3;">--º</p>
-					<p class="card-dash-label">lugar geral</p>
-				</div>
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="melhorPontuacao">--</p>
-					<p class="card-dash-label">melhor pontuação</p>
-				</div>
-				<div class="card-dash-stat">
-					<p class="card-dash-valor" id="mediaPontuacao">--</p>
-					<p class="card-dash-label">pontuação média</p>
-				</div>
-			</div>
-
-			<!-- Gráfico de linha: evolução de pontuação -->
-			<h3 class="tituloGraficos" style="margin-top:10px;">Evolução de pontuação</h3>
-			<div class="graph">
-				<canvas id="chartEvolucao"></canvas>
-			</div>
-			<div class="label-captura">
-				<p id="avisoEvolucao" style="color:white"></p>
-			</div>
-
-			<!-- Questões da última partida -->
-			<h3 class="tituloGraficos" style="margin-top:30px;">Desempenho por questão — última partida</h3>
-			<div id="listaQuestoes" style="width:70%;margin:0 auto 40px;"></div>
-			<div class="label-captura">
-				<p id="avisoQuestoes" style="color:white"></p>
-			</div>
-
-		</div>
-
-	</div>
-
-</body>
+	</body>
 
 </html>
 
 <script>
-	// ─────────────────────────────────────────────────────────────────────────────
-	// Chama GET /dashboard/pessoal/:idUsuario — rota criada em src/routes/dashboard.js
-	// O ID_USUARIO já é salvo no login em sessionStorage (ver login.html)
-	// ─────────────────────────────────────────────────────────────────────────────
-	function carregarDashboardPessoal() {
-		var idUsuario = sessionStorage.getItem('ID_USUARIO');
+function carregarDashboardPessoal() {
+	var idUsuario = sessionStorage.getItem('ID_USUARIO');
 
-		if (!idUsuario) {
-			console.error('ID_USUARIO não encontrado na sessão');
-			return;
-		}
+	if (!idUsuario) {
+		console.error('ID_USUARIO não encontrado na sessão');
+		return;
+	}
 
-		fetch('/dashboard/pessoal/' + idUsuario, { cache: 'no-store' })
-			.then(function(response) {
-				if (response.ok) {
-					response.json().then(function(dados) {
-						console.log('Dados recebidos:', JSON.stringify(dados));
-						preencherCards(dados);
-						preencherRankingPessoal(dados);
-						plotarEvolucao(dados.partidas);
-						preencherQuestoes(dados.ultima_partida);
-					});
-				} else {
-					console.error('Erro na API - status:', response.status);
-					document.getElementById('avisoEvolucao').innerHTML =
-						"<i class='fa-solid fa-triangle-exclamation'></i> Não foi possível carregar os dados.";
-				}
-			})
-			.catch(function(error) {
-				console.error('Erro ao carregar dashboard pessoal:', error.message);
+	fetch('/dashboard/pessoal/' + idUsuario, { cache: 'no-store' })
+		.then(function(response) {
+			if (response.ok) {
+				response.json().then(function(dados) {
+					console.log('Dados recebidos:', JSON.stringify(dados));
+					preencherCards(dados);
+					preencherRankingPessoal(dados);
+					plotarEvolucao(dados.partidas);
+					preencherQuestoes(dados.ultima_partida);
+				});
+			} else {
+				console.error('Erro na API - status:', response.status);
 				document.getElementById('avisoEvolucao').innerHTML =
-					"<i class='fa-solid fa-triangle-exclamation'></i> Erro de conexão com o servidor.";
-			});
-	}
-
-	function preencherCards(dados) {
-		var acertos = Number(dados.total_acertos) || 0;
-		var erros   = Number(dados.total_erros)   || 0;
-		var taxa = (acertos + erros) > 0 ? Math.round(acertos / (acertos + erros) * 100) : 0;
-
-		document.getElementById('cardAcertos').textContent  = acertos;
-		document.getElementById('cardErros').textContent    = erros;
-		document.getElementById('cardTaxa').textContent     = taxa + '%';
-		document.getElementById('cardPartidas').textContent = Number(dados.total_partidas) || 0;
-		document.getElementById('cardTaxa').style.color     = taxa >= 60 ? '#4ecca3' : '#e05a5a';
-	}
-
-	function preencherRankingPessoal(dados) {
-		document.getElementById('posicaoRanking').textContent  = (dados.posicao_ranking || '--') + 'º';
-		document.getElementById('melhorPontuacao').textContent = Number(dados.melhor_pontuacao) || '--';
-		document.getElementById('mediaPontuacao').textContent  = dados.media_pontuacao
-			? Math.round(Number(dados.media_pontuacao))
-			: '--';
-	}
-
-	// ─────────────────────────────────────────────────────────────────────────────
-	// Plota gráfico de linha — equivalente ao "plotarGrafico" do AquaTech
-	// ─────────────────────────────────────────────────────────────────────────────
-	function plotarEvolucao(partidas) {
-		if (!partidas || partidas.length === 0) {
-			document.getElementById('avisoEvolucao').innerHTML =
-				"<i class='fa-solid fa-triangle-exclamation'></i> Nenhuma partida encontrada ainda.";
-			return;
-		}
-
-		var labels = partidas.map(function(p, i) { return 'partida ' + (i + 1); });
-		var pontos = partidas.map(function(p) { return Number(p.pontuacao); });
-
-		var dadosGrafico = {
-			labels: labels,
-			datasets: [{
-				label: 'Pontuação',
-				data: pontos,
-				fill: false,
-				borderColor: '#4ecca3',
-				backgroundColor: 'rgba(78,204,163,0.08)',
-				pointBackgroundColor: '#4ecca3',
-				pointRadius: 5,
-				tension: 0.4
-			}]
-		};
-
-		new Chart(document.getElementById('chartEvolucao'), {
-			type: 'line',
-			data: dadosGrafico,
-			options: {
-				responsive: true,
-				plugins: { legend: { display: false } },
-				scales: {
-					x: { ticks: { color: '#a0b8a0', font: { size: 11 } }, grid: { color: '#2a3a2a' } },
-					y: { ticks: { color: '#a0b8a0', font: { size: 11 } }, grid: { color: '#2a3a2a' }, beginAtZero: false }
-				}
+					"<i class='fa-solid fa-triangle-exclamation'></i> Não foi possível carregar os dados.";
 			}
+		})
+		.catch(function(error) {
+			console.error('Erro ao carregar dashboard pessoal:', error.message);
+			document.getElementById('avisoEvolucao').innerHTML =
+				"<i class='fa-solid fa-triangle-exclamation'></i> Erro de conexão com o servidor.";
 		});
+}
+
+function preencherCards(dados) {
+	var acertos = Number(dados.total_acertos) || 0;
+	var erros   = Number(dados.total_erros)   || 0;
+	var taxa = (acertos + erros) > 0 ? Math.round(acertos / (acertos + erros) * 100) : 0;
+
+	document.getElementById('cardAcertos').innerHTML  = acertos;
+	document.getElementById('cardErros').innerHTML    = erros;
+	document.getElementById('cardTaxa').innerHTML     = taxa + '%';
+	document.getElementById('cardPartidas').innerHTML = Number(dados.total_partidas) || 0;
+	document.getElementById('cardTaxa').style.color     = taxa >= 60 ? '#4ecca3' : '#e05a5a';
+}
+
+function preencherRankingPessoal(dados) {
+	document.getElementById('posicaoRanking').innerHTML  = (dados.posicao_ranking || '--') + 'º';
+	document.getElementById('melhorPontuacao').innerHTML = Number(dados.melhor_pontuacao) || '--';
+	document.getElementById('mediaPontuacao').innerHTML  = dados.media_pontuacao
+		? Math.round(Number(dados.media_pontuacao))
+		: '--';
+}
+
+function plotarEvolucao(partidas) {
+	if (!partidas || partidas.length === 0) {
+		document.getElementById('avisoEvolucao').innerHTML =
+			"<i class='fa-solid fa-triangle-exclamation'></i> Nenhuma partida encontrada ainda.";
+		return;
 	}
 
-	function preencherQuestoes(questoes) {
-		var el = document.getElementById('listaQuestoes');
+	var labels = partidas.map(function(p, i) { return 'partida ' + (i + 1); });
+	var pontos = partidas.map(function(p) { return Number(p.pontuacao); });
 
-		if (!questoes || questoes.length === 0) {
-			document.getElementById('avisoQuestoes').innerHTML =
-				"<i class='fa-solid fa-triangle-exclamation'></i> Nenhuma partida registrada ainda.";
-			return;
+	var dadosGrafico = {
+		labels: labels,
+		datasets: [{
+			label: 'Pontuação',
+			data: pontos,
+			fill: false,
+			borderColor: '#4ecca3',
+			backgroundColor: 'rgba(78,204,163,0.08)',
+			pointBackgroundColor: '#4ecca3',
+			pointRadius: 5,
+			tension: 0.4
+		}]
+	};
+
+	new Chart(document.getElementById('chartEvolucao'), {
+		type: 'line',
+		data: dadosGrafico,
+		options: {
+			responsive: true,
+			plugins: { legend: { display: false } },
+			scales: {
+				x: { ticks: { color: '#a0b8a0', font: { size: 11 } }, grid: { color: '#2a3a2a' } },
+				y: { ticks: { color: '#a0b8a0', font: { size: 11 } }, grid: { color: '#2a3a2a' }, beginAtZero: false }
+			}
 		}
+	});
+}
 
-		el.innerHTML = '';
-		questoes.forEach(function(q, index) {
-			let acertou = q.acertou == 1 || q.acertou === true;
-			let cor = acertou ? '#4ecca3' : '#e05a5a';
-			let texto = acertou ? 'acerto' : 'errou';
+function preencherQuestoes(questoes) {
+	var el = document.getElementById('listaQuestoes');
 
-			el.innerHTML += `
-				<div class="pessoal-questao-status" >
-					<span style="color:#4a6a4a;width:18px;flex-shrink:0;">${index + 1}</span>
-					<span style="flex:1;">${q.enunciado}</span>
-					<span style="color:${cor};flex-shrink:0;">
-						 ${texto}
-					</span>
-				</div>
-			`;
-		});
+	if (!questoes || questoes.length === 0) {
+		document.getElementById('avisoQuestoes').innerHTML =
+			"<i class='fa-solid fa-triangle-exclamation'></i> Nenhuma partida registrada ainda.";
+		return;
 	}
+
+	el.innerHTML = '';
+	questoes.forEach(function(q, index) {
+		let acertou = q.acertou == 1 || q.acertou === true;
+		let cor = acertou ? '#4ecca3' : '#e05a5a';
+		let texto = acertou ? 'acerto' : 'errou';
+
+		el.innerHTML += 
+		`
+			<div class="pessoal-questao-status" >
+			<span style="color:#4a6a4a;width:18px;">${index + 1}</span>
+			<span style="flex:1;">${q.enunciado}</span>
+			<span style="color:${cor};flex-shrink:0;">
+			${texto}
+			</span>
+			</div>
+		`;
+	});
+}
 </script>
 
