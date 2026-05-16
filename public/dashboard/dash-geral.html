@@ -8,8 +8,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Neovim Quiz | Dashboard Geral</title>
 
-		<link rel="stylesheet" href="./../css/dashboards.css">
-		<link rel="stylesheet" href="./../css/estilo.css" />
+		<!-- <link rel="stylesheet" href="./../css/dashboards.css"> -->
+		<!-- <link rel="stylesheet" href="./../css/estilo.css" /> -->
+		<link rel="stylesheet" href="./../css/dash-geral.css">
+		<link rel="stylesheet" href="./../css/header-left.css">
 		<script src="../js/sessao.js"></script>
 
 		<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -21,91 +23,93 @@
 
 	<body onload="validarSessao(); carregarDashboardGeral();">
 
-		<div class="janela">
 
-			<div class="header-left">
-				<h1>Neovim</h1>
-				<div class="hello">
-					<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-				</div>
-				<div class="btn-nav-white">
-					<a href="./dash-pessoal.html"><h3>Pessoal</h3></a>
-				</div>
-				<div class="btn-nav">
-					<h3>Geral</h3>
-				</div>
-				<div class="btn-nav-white">
-					<a href="./quiz.html"><h3>Quiz</h3></a>
-				</div>
-				<div class="btn-logout" onclick="limparSessao()">
-					<h3>Sair</h3>
+		<div class="container-geral-dash">
+			<div class="aside-nav">
+				<div class="header-left">
+					<h1>Neovim</h1>
+					<div class="hello">
+						<h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+					</div>
+					<div class="btn-nav-white">
+						<a href="./dash-pessoal.html"><h3>Pessoal</h3></a>
+					</div>
+					<div class="btn-nav">
+						<h3>Geral</h3>
+					</div>
+					<div class="btn-nav-white">
+						<a href="./quiz.html"><h3>Quiz</h3></a>
+					</div>
+					<div class="btn-logout" onclick="limparSessao()">
+						<h3>Sair</h3>
+					</div>
 				</div>
 			</div>
-
-			<div class="dash" >
-
-				<div class="container-grafico-barra">
-					<div class="cards-dash">
-						<div class="card-dash-stat">
-							<p class="card-dash-valor" id="totalPartidas">--</p>
-							<p class="card-dash-label">partidas jogadas</p>
+			<div class="content-dash-geral">
+				<div class="box-dash-geral">
+					<div class="container-grafico-barra">
+						<div class="cards-dash">
+							<div class="card-dash-stat">
+								<p class="card-dash-valor" id="totalPartidas">--</p>
+								<p class="card-dash-label">partidas jogadas</p>
+							</div>
+							<div class="card-dash-stat">
+								<p class="card-dash-valor" id="totalAcertos" style="color:#4ecca3">--</p>
+								<p class="card-dash-label">acertos totais</p>
+							</div>
+							<div class="card-dash-stat">
+								<p class="card-dash-valor" id="taxaGeral">--%</p>
+								<p class="card-dash-label">taxa de acerto</p>
+							</div>
 						</div>
-						<div class="card-dash-stat">
-							<p class="card-dash-valor" id="totalAcertos" style="color:#4ecca3">--</p>
-							<p class="card-dash-label">acertos totais</p>
-						</div>
-						<div class="card-dash-stat">
-							<p class="card-dash-valor" id="taxaGeral">--%</p>
-							<p class="card-dash-label">taxa de acerto</p>
-						</div>
-					</div>
 
-					<h3 class="tituloGraficos" style="margin-top:20px;">Acertos por participantes</h3>
-					<div style="display:flex;justify-content:center;gap:20px;margin-bottom:8px;">
-						<span style="color:#c8d8c8;font-size:13px;">
-							<span class="caixa-vermelha-dash"></span>Acertos
-						</span>
-						<span style="color:#c8d8c8;font-size:13px;">
-							<span class="caixa-verde-dash"></span>Erros
-						</span>
-					</div>
-					<div class="area-graph">
-						<div class="graph">
-							<canvas id="chartBarras"></canvas>
+						<h3 class="tituloGraficos" style="margin-top:20px;">Acertos por participantes</h3>
+						<div class="legenda-dash">
+							<span>
+								<span class="caixa-vermelha-dash"></span>Acertos
+							</span>
+							<span>
+								<span class="caixa-verde-dash"></span>Erros
+							</span>
 						</div>
-					</div>
-					<div class="label-captura">
-						<p id="avisoGeral" style="color:white"></p>
-					</div>
+						<div class="area-graph">
+							<div class="graph">
+								<canvas id="chartBarras"></canvas>
+							</div>
+						</div>
+						<div class="label-captura">
+							<p id="avisoGeral" style="color:white"></p>
+						</div>
 
-
-				</div>
-				<h3 class="tituloGraficos" style="margin-top:30px;">Proporção geral</h3>
-				<div style="display:flex;justify-content:center;align-items:center;gap:40px;flex-wrap:wrap;margin-bottom:40px;">
-					<div style="width:200px;">
-						<canvas id="chartDonut"></canvas>
 					</div>
-					<div style="color:#c8d8c8;font-size:14px;line-height:2.2;">
-						<p>
-							<span style="display:inline-block;width:12px;height:12px;background:#4ecca3;border-radius:2px;margin-right:6px;"></span>
-							Acertos: <span id="pctAcertos" style="color:#4ecca3">--%</span>
-						</p>
-						<p>
-							<span style="display:inline-block;width:12px;height:12px;background:#e05a5a;border-radius:2px;margin-right:6px;"></span>
-							Erros: <span id="pctErros" style="color:#e05a5a">--%</span>
-						</p>
 					</div>
 				</div>
-
+			<div class="aside-ranking">
+				<div class="container-grafico-donut">
+					<h3 class="tituloGraficos" >Proporção geral</h3>
+					<div class="dash-donut-content">
+						<div class="donut">
+							<canvas id="chartDonut"></canvas>
+						</div>
+						<div class="area-donut-legenda">
+							<span class="legenda-dash-donut">
+								<span class="caixa-vermelha-dash"></span>
+								Acertos: <span id="pctAcertos" style="color:#4ecca3">--%</span>
+							</span>
+							<br>
+							<span class="legenda-dash-donut">
+								<span class="caixa-verde-dash"></span>
+								Erros: <span id="pctErros" style="color:#e05a5a">--%</span>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="sideBarRanking">
+					<h3 class="tituloGraficos" style="font-size:13px;margin-bottom:16px;">Ranking Geral</h3>
+					<div id="rankingList"></div>
+				</div>
 			</div>
-
-			<div class="sideBarRanking">
-				<h3 class="tituloGraficos" style="font-size:13px;margin-bottom:16px;">Ranking Geral</h3>
-				<div id="rankingList"></div>
 			</div>
-
-		</div>
-
 	</body>
 
 </html>
